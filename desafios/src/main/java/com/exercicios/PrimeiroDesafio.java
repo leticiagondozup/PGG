@@ -19,6 +19,8 @@ public class PrimeiroDesafio {
             listarArquivos(arquivo);
         }
 
+        sc.close();
+
     }
 
     public static void listarArquivos(File file) {
