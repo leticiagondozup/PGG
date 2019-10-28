@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class PrimeiroDesafio {
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
 
         Scanner sc = new Scanner(System.in);
 
@@ -15,8 +15,12 @@ public class PrimeiroDesafio {
 
         File folder = new File(caminho);
 
-        for (File arquivo : folder.listFiles()) {
-            listarArquivos(arquivo);
+        try {
+            for (File arquivo : folder.listFiles()) {
+                listarArquivos(arquivo);
+            }
+        }catch (NullPointerException exception){
+            System.out.println("Error: Não é possível identificar diretorio/arquivo nulo");
         }
 
         sc.close();
@@ -32,6 +36,7 @@ public class PrimeiroDesafio {
         for (File no : file.listFiles()) {
             listarArquivos(no);
         }
+
     }
 
 }
