@@ -17,36 +17,38 @@ public class PrimeiroDesafio {
         File folder = new File(caminho);
 
 
-        File file = getFolders(folder);
+        getFolders(folder);
 
-        for (File arquivo : file.listFiles()) {
-            listarArquivos(arquivo);
-        }
+      //  File file = getFolders(folder);
+
+       //for (File arquivo : file.listFiles(){
+         //   listarArquivos(arquivo);
+        //}
 
 
         sc.close();
 
     }
 
-    public static File getFolders(File folder) throws Exception {
+    public static void getFolders(File folder) {
         try {
             if (folder != null) {
-                return folder;
-                // for (File arquivo : folder.listFiles()) {
-                //   listarArquivos(arquivo);
-            } else {
-                return null;
+                //return folder;
+                for (File arquivo : folder.listFiles()) {
+                    listarArquivos(arquivo);
+                }
+            } else{
+                    //return null;
+                    throw new Exception("Não é possivel identificar arquivos ou diretorios nulos");
+
+                }
+            } catch(Exception exception){
                 //throw new Exception("Não é possivel identificar arquivos ou diretorios nulos");
-
+                System.out.println("Error: " + exception.getMessage());
+                // return null;
             }
-        } catch (Exception exception) {
-            throw new Exception("Não é possivel identificar arquivos ou diretorios nulos");
-            //System.out.println("Error: " + exception.getMessage());
-            //return null;
+
         }
-    }
-
-
 
     public static void listarArquivos(File file){
         if (file.isFile()) {
@@ -61,3 +63,4 @@ public class PrimeiroDesafio {
     }
 
 }
+
