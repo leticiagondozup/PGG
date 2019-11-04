@@ -13,12 +13,17 @@ import java.net.http.HttpResponse;
 
 public class SegundoDesafio {
 
-    public static void main(String[] agrs) throws IOException, InterruptedException {
+    public static void main(String[] agrs) {
+
         HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
+        HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create("https://www.reddit.com/r/programming/"))
                 .build();
-        HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        //Comunicação síncrona
+        HttpResponse<String> response = client.send(req,
+                HttpResponse.BodyHandlers.ofString());
+
         System.out.println(response.body());
     }
 
