@@ -1,12 +1,15 @@
 package com.exercicios;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
 import static com.exercicios.PaginaWeb.listSort;
 
 
 public class SegundoDesafio {
 
     private static ArrayList<String> listTitle;
+    private static ArrayList<String> ordenacao;
 
     public static void main(String[] agrs) throws IOException, InterruptedException {
 
@@ -19,8 +22,11 @@ public class SegundoDesafio {
             System.out.println("Ocorreu um erro: " + e.getMessage());
         }
 
+
+
         listTitle = PaginaWeb.filterResult(contentPage);
-        for (String title : listSort(listTitle)) {
+        ordenacao = PaginaWeb.listSort(listTitle);
+        for (String title : ordenacao) {
             System.out.println(title);
 
         }
