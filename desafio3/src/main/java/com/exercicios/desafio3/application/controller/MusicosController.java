@@ -4,6 +4,7 @@ import com.exercicios.desafio3.application.model.Musicos;
 
 import com.exercicios.desafio3.application.service.MusicosService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,13 +13,11 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/musicos")
 public class MusicosController {
 
     @Autowired
     private MusicosService service;
-
-
 
     public MusicosController (MusicosService service) {
         this.service = service;
@@ -26,9 +25,10 @@ public class MusicosController {
 
 
    @PostMapping
-   @RequestMapping("musico")
-    public Musicos create(@Valid @RequestBody Musicos musicos){
-        return service.save(musicos);
+    public ResponseEntity<Musicos> create(@Valid @RequestBody Musicos musicos){
+       Musicos create = service.save(musicos);
+       return ResponseEntity.status(HttpStatus.CREATED).body(create);
+
     }
 
     @GetMapping
@@ -36,15 +36,15 @@ public class MusicosController {
         return service.findAll();
     }
 
-    @PutMapping(value="/{id}")
-    public ResponseEntity update(@PathVariable("id") long id,
+    @PutMapping(path="/{id}")
+    public ResponseEntity update(@PathVariable long id,
                                  @RequestBody Musicos musicos) {
         return service.findById(id)
                 .map(musico -> {
                     musico.setNome(musicos.getNome());
                     musico.setCpf(musicos.getCpf());
-                    Musicos updated = service.save(musico);
-                    return ResponseEntity.ok().body(updated);
+                    Musicos update = service.update(musico);
+                    return ResponseEntity.status(HttpStatus.OK).body(update);
                 }).orElse(ResponseEntity.notFound().build());
     }
 
@@ -53,7 +53,7 @@ public class MusicosController {
         return service.findById(id)
                 .map(musico -> {
                     service.deleteById(id);
-                    return ResponseEntity.ok().build();
+                    return ResponseEntity.status(HttpStatus.ACCEPTED).build();
                 }).orElse(ResponseEntity.notFound().build());
     }
 

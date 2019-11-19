@@ -14,8 +14,10 @@ public class MusicosService {
     @Autowired
     private MusicosRepository musicosRepository;
 
-    public MusicosService() {
+    @Autowired
+    private Musicos musicos;
 
+    public MusicosService() {
     }
 
     public Optional<Musicos> findById(Long id) {
@@ -37,4 +39,18 @@ public class MusicosService {
     public void deleteAll() {
         musicosRepository.deleteAll();
     }
+
+    public Musicos update( Musicos musicos) {
+        return musicosRepository.save(musicos);
+    }
+
+    public void setMusicosRepository(MusicosRepository musicosRepository) {
+        this.musicosRepository = musicosRepository;
+    }
+
+    public void setMusicos(Musicos musicos){
+        this.musicos = musicos;
+    }
+
+
 }
