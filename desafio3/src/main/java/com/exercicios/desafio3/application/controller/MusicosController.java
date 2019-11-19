@@ -1,54 +1,66 @@
-package com.exercicios.desafio3.controller;
+package com.exercicios.desafio3.application.controller;
 
-import com.exercicios.desafio3.model.Musicos;
-import com.exercicios.desafio3.repository.MusicosRepository;
+import com.exercicios.desafio3.application.model.Musicos;
+
+import com.exercicios.desafio3.application.service.MusicosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/musicos")
+@RequestMapping("/api/")
 public class MusicosController {
 
-    private MusicosRepository repository;
+    @Autowired
+    private MusicosService service;
 
-    MusicosController(MusicosRepository musicosRepository) {
-        this.repository = musicosRepository;
+
+
+    public MusicosController (MusicosService service) {
+        this.service = service;
     }
 
 
-    @PostMapping
-    public ResponseEntity<Musicos> create (@RequestBody Musicos musicos){
-        Musicos create = repository.save(musicos);
-        return ResponseEntity.ok().body(create);
+   @PostMapping
+   @RequestMapping("musico")
+    public Musicos create(@Valid @RequestBody Musicos musicos){
+        return service.save(musicos);
     }
 
     @GetMapping
-    public List findAll(){
-        return repository.findAll();
+    public List<Musicos> findAll(){
+        return service.findAll();
     }
 
     @PutMapping(value="/{id}")
     public ResponseEntity update(@PathVariable("id") long id,
                                  @RequestBody Musicos musicos) {
-        return repository.findById(id)
+        return service.findById(id)
                 .map(musico -> {
                     musico.setNome(musicos.getNome());
                     musico.setCpf(musicos.getCpf());
-                    Musicos updated = repository.save(musico);
+                    Musicos updated = service.save(musico);
                     return ResponseEntity.ok().body(updated);
                 }).orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping(path ={"/{id}"})
     public ResponseEntity<?> delete(@PathVariable long id) {
-        return repository.findById(id)
+        return service.findById(id)
                 .map(musico -> {
-                    repository.deleteById(id);
+                    service.deleteById(id);
                     return ResponseEntity.ok().build();
                 }).orElse(ResponseEntity.notFound().build());
     }
 
+
+    public void setService(MusicosService service) {
+        this.service = service;
+    }
+
+    public void setMusicos(Musicos musicos){}
 }

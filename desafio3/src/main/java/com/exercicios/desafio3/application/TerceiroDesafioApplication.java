@@ -7,7 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TerceiroDesafioApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TerceiroDesafioApplication.class, args);
+
+	    SpringApplication.run(TerceiroDesafioApplication.class, args);
 	}
 
 }

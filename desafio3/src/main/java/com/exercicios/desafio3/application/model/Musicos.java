@@ -1,8 +1,16 @@
-package com.exercicios.desafio3.model;
+package com.exercicios.desafio3.application.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "TB_MUSICOS")
 public class Musicos {
 
-    private Long id;
+    private static final long serialVersionUID= 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String nome;
     private String cpf;
 
@@ -11,6 +19,11 @@ public class Musicos {
         this.nome = nome;
         this.cpf = cpf;
     }
+
+    public Musicos() {
+    }
+
+
 
     public Long getId() {
         return id;
