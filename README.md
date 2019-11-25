@@ -39,7 +39,7 @@ O algoritmo lista os arquivos e diretórios do caminho de sua preferência.
     
     *Na pasta de destino copie e execute (no terminal) o seguinte comando java -jar desafio3-0.0.1-SNAPSHOT.jar;
     
-    *Link da colection no postman https://www.getpostman.com/collections/b8aaa087a0e7701e0b67
+    *Link da collection no postman https://www.getpostman.com/collections/b8aaa087a0e7701e0b67
     
     
    
