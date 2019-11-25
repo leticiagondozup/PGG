@@ -56,7 +56,7 @@ public class MusicosServiceTest {
     }
 
     @Test
-    public void testUpdatePeople(){
+    public void testUpdate(){
         when(repository.save(musicos)).thenReturn(musicos);
         Assert.assertEquals(musicos, service.update(musicos));
     }

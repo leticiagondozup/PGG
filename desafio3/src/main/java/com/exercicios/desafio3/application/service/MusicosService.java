@@ -1,8 +1,10 @@
 package com.exercicios.desafio3.application.service;
 
+
 import com.exercicios.desafio3.application.model.Musicos;
 import com.exercicios.desafio3.application.repository.MusicosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +16,6 @@ public class MusicosService {
     @Autowired
     private MusicosRepository musicosRepository;
 
-    @Autowired
     private Musicos musicos;
 
     public MusicosService() {
